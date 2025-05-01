@@ -5,10 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.objenesis.Objenesis;
+import org.objenesis.ObjenesisStd;
 import org.psnbtech.*;
-import sun.reflect.ReflectionFactory;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -23,6 +23,8 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class TetrisTest {
+
+    private final Objenesis objenesis = new ObjenesisStd();
 
     @Mock
     private BoardPanel mockBoard;
@@ -43,15 +45,7 @@ public class TetrisTest {
 
     @Before
     public void setUp() throws Exception {
-        ReflectionFactory rf = ReflectionFactory.getReflectionFactory();
-        Constructor<Object> objConstructor = Object.class.getDeclaredConstructor();
-        // Build a "synthetic" constructor
-        Constructor<Tetris> fakeConstructor = (Constructor<Tetris>) rf.newConstructorForSerialization(Tetris.class, objConstructor);
-        // Mark it as accessible, to bypass the private clauses
-        fakeConstructor.setAccessible(true);
-
-        // Instantiate without running Tetris.<init>()
-        tetris = fakeConstructor.newInstance();
+        tetris = objenesis.newInstance(Tetris.class);
 
         // Inject our mocks before any logic runs
         Field board = Tetris.class.getDeclaredField("board");
