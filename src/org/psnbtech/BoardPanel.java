@@ -358,11 +358,12 @@ public class BoardPanel extends JPanel {
 			 * for players, and makes the pieces look nicer by breaking them up.
 			 */
 			g.setColor(Color.DARK_GRAY);
-			for(int x = 0; x < COL_COUNT; x++) {
-				for(int y = 0; y < VISIBLE_ROW_COUNT; y++) {
-					g.drawLine(0, y * TILE_SIZE, COL_COUNT * TILE_SIZE, y * TILE_SIZE);
-					g.drawLine(x * TILE_SIZE, 0, x * TILE_SIZE, VISIBLE_ROW_COUNT * TILE_SIZE);
-				}
+			for (int y = 0; y <= VISIBLE_ROW_COUNT; y++) {
+				g.drawLine(0, y*TILE_SIZE, COL_COUNT*TILE_SIZE, y*TILE_SIZE);
+			}
+
+			for (int x = 0; x <= COL_COUNT; x++) {
+				g.drawLine(x*TILE_SIZE, 0, x*TILE_SIZE, VISIBLE_ROW_COUNT*TILE_SIZE);
 			}
 		}
 
