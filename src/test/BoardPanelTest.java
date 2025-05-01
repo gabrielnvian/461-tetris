@@ -41,7 +41,8 @@ public class BoardPanelTest {
         board.clear();
 
         int result = board.checkLines();
-        assertEquals(22, result);
+        // Zero because no rows have been removed, board is empty
+        assertEquals(0, result);
     }
 
     @Test
@@ -55,7 +56,8 @@ public class BoardPanelTest {
         board.addPiece(TileType.TypeO, 8, 2, 0);
 
         int result = board.checkLines();
-        assertEquals(22, result);
+        // TypeO has height 2, so we should be seeing 2 removed rows.
+        assertEquals(2, result);
     }
 
     @Test
