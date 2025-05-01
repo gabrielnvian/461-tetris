@@ -165,7 +165,7 @@ public class Tetris extends JFrame {
 				 * position is valid. If so, we decrement the current column by 1.
 				 */
 				case KeyEvent.VK_A:
-					if(!isPaused && board.isValidAndEmpty(currentType, currentCol - 1, currentRow, currentRotation)) {
+					if(!isPaused && !isNewGame && !isGameOver && board.isValidAndEmpty(currentType, currentCol - 1, currentRow, currentRotation)) {
 						currentCol--;
 					}
 					break;
@@ -176,7 +176,7 @@ public class Tetris extends JFrame {
 				 * position is valid. If so, we increment the current column by 1.
 				 */
 				case KeyEvent.VK_D:
-					if(!isPaused && board.isValidAndEmpty(currentType, currentCol + 1, currentRow, currentRotation)) {
+					if(!isPaused && !isNewGame && !isGameOver && board.isValidAndEmpty(currentType, currentCol + 1, currentRow, currentRotation)) {
 						currentCol++;
 					}
 					break;
@@ -188,7 +188,7 @@ public class Tetris extends JFrame {
 				 * rotation, the code for rotating the piece is handled in another method.
 				 */
 				case KeyEvent.VK_Q:
-					if(!isPaused) {
+					if(!isPaused && !isNewGame && !isGameOver) {
 						rotatePiece((currentRotation == 0) ? 3 : currentRotation - 1);
 					}
 					break;
@@ -200,7 +200,7 @@ public class Tetris extends JFrame {
 				 * rotation, the code for rotating the piece is handled in another method.
 				 */
 				case KeyEvent.VK_E:
-					if(!isPaused) {
+					if(!isPaused && !isNewGame && !isGameOver) {
 						rotatePiece((currentRotation == 3) ? 0 : currentRotation + 1);
 					}
 					break;
